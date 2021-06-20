@@ -15,6 +15,7 @@ def fibonacci():
     Closure Function Returns:
         int: The next Fibonacci number.
     """
+    
     n1, n2 = 0, 1
     def calc_next_number():
         nonlocal n1, n2
@@ -33,10 +34,10 @@ def check_docstrings(docstring_length: int = 50):
         docstring_length (int, optional): The required minimum length of the docstring. Defaults to 50.
 
     Returns:
-        callable: Function to check whether the function passed has a docstring with more than 50 characters.
+        callable: Function to check whether the function passed has a docstring with more than the given characters.
         
     Closure Function Returns:
-        bool: True if given function has a docstring with more than 50 characters else False.
+        bool: True if given function has a docstring with more than the given characters else False.
     """
 
     assert type(docstring_length) == int, "`docstring_length` can only be a positive integer"
@@ -57,19 +58,21 @@ def check_docstrings(docstring_length: int = 50):
 
 
 def call_counter_log_global(func: Callable):
-    """It is closure. It returns a same function as input with counts how many times a given function was called and updates
-    the count in a global dictionary.
+    """It is closure. It takes a function as an input, add feature of tracking the fucntion and counting the number of 
+    time the given function is called, at last returns the same function as output. 
+    The updates for the count are done in a global dictionary with name - `count_dict`. Any global variable with 
+    the same name will be reinitialized to new empty dictionary.
 
     Args:
         func (Callable): The function whose call count is to be tracked.
 
     Returns:
-        callable: The same function whose check the call count for the given function.
+        callable: The input function.
     """
 
-    global count_dict
+    global count_dict  # 
     count_dict = dict()
-    print("Initializing a global dictionary named - `count_dict`")
+    print("Making the empty global dictionary named - `count_dict`.")
     cnt = 0
     def count(*args, **kwargs):
         nonlocal count
@@ -80,6 +83,18 @@ def call_counter_log_global(func: Callable):
 
 
 def call_counter_log(func: Callable, count_dict: dict):
+    """It is closure. It takes a function as an input, add feature of tracking the fucntion and counting the number of 
+    time the given function is called, at last returns the same function as output. 
+    The updates for the count are done in a given input dictionary.
+
+    Args:
+        func (Callable): The function whose call count is to be tracked.
+        count_dict (dict): The dictionary in which count will be updated.
+
+    Returns:
+        callable: The input function
+    """
+
     cnt = 0
     def count(*args, **kwargs):
         nonlocal cnt
