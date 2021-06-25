@@ -109,3 +109,40 @@ def call_counter_log(func: Callable, count_dict: dict):
         return func(*args, **kwargs)
     return count
 
+
+
+# *********************** Helper functions **************************
+
+def add(x, y):
+    """
+    it is a addition function of two numbers only
+    """
+    if isinstance(x, (int, float)) and isinstance(y, (int, float)):
+        return x+y
+    else:
+        raise TypeError("Please provide the number in int or float only")
+
+
+
+def mul(x, y):
+    """
+    it is a multiplication function of two numbers only
+    """
+    if isinstance(x, (int, float)) and isinstance(y, (int, float)):
+        return x*y
+    else:
+        raise TypeError("Please provide the number in int or float only")
+
+
+
+def div(x, y):
+    """
+    it is a division function of two numbers only
+    """
+    if isinstance(x, (int, float)) and isinstance(y, (int, float)):
+        if y == 0:
+            raise ValueError("Cannot divide by zero")
+        else:
+            return x/y
+    else:
+        raise TypeError("Please provide the number in int or float only")
