@@ -3,6 +3,8 @@ The file contains the function to generate the next Fibonacci number.
 """
 from typing import Callable
 
+count_dict = dict()
+
 
 def fibonacci():
     """This is a closure. It returns a funcrion that generates the next Fibonacci number every time the instance of 
@@ -75,14 +77,12 @@ def call_counter_log_global(func: Callable):
         callable: The input function.
     """
 
-    global count_dict
-    count_dict = dict()
-    print("Making the empty global dictionary named - `count_dict`.")
-    cnt = 0
+    global count_dict    
+    if func.__name__ not in count_dict.keys():
+        count_dict[func.__name__] = 0
+
     def count(*args, **kwargs):
-        nonlocal count
-        cnt =+ 1
-        count_dict[func.__name__] = cnt
+        count_dict[func.__name__] += 1
         return func(*args, **kwargs)
     return count
 
@@ -100,11 +100,12 @@ def call_counter_log(func: Callable, count_dict: dict):
         callable: The input function
     """
 
-    cnt = 0
+    if func.__name__ not in count_dict.keys():
+        count_dict[func.__name__] = 0
+
     def count(*args, **kwargs):
-        nonlocal cnt
         nonlocal count_dict
-        cnt =+ 1
-        count_dict[func.__name__] = cnt
+        count_dict[func.__name__] += 1
         return func(*args, **kwargs)
     return count
+
